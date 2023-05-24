@@ -1,5 +1,7 @@
 FROM node:16-alpine
 WORKDIR /app
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
 RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile

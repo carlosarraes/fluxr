@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - cicd
 
 jobs:
   deploy:
@@ -30,6 +29,7 @@ jobs:
           context: server
           push: true
           tags: gcr.io/refined-dogfish-353918/fluxr
+          build-args: DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v1
@@ -49,10 +49,3 @@ jobs:
             --platform managed \
             --region southamerica-east1 \
             --allow-unauthenticated
-
-      - name: Set Environment Variables in Cloud Run Service
-        run: |
-          gcloud run services update fluxr \
-            --set-env-vars DATABASE_URL=${{ secrets.DATABASE_URL }} \
-            --platform managed \
-            --region southamerica-east1
