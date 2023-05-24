@@ -8,11 +8,19 @@ export class CompanyController {
 
   @Post()
   createCompany(@Body() dto: CompanyDto) {
-    return this.companyService.createCompany(dto)
+    try {
+      return this.companyService.createCompany(dto)
+    } catch (error) {
+      return error
+    }
   }
 
   @Get(':id')
   getCompany(@Param('id') id: string) {
-    return this.companyService.getCompany(Number(id))
+    try {
+      return this.companyService.getCompany(Number(id))
+    } catch (error) {
+      return error
+    }
   }
 }
