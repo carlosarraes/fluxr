@@ -50,7 +50,7 @@ export class AuthService {
     return newUser
   }
 
-  async login(dto: LoginDto) {
+  async signin(dto: LoginDto) {
     const user = await this.prisma.user.findUnique({
       where: {
         email: dto.email,
@@ -67,13 +67,23 @@ export class AuthService {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED)
     }
 
-    const token = this.signToken(user.id, user.email, user.role)
+    const token = await this.signToken(
+      user.id,
+      user.companyId,
+      user.email,
+      user.role,
+    )
 
     return token
   }
 
-  async signToken(userId: number, email: string, role: string) {
-    const payload = { sub: userId, email, role }
+  async signToken(
+    userId: number,
+    companyId: number,
+    email: string,
+    role: string,
+  ) {
+    const payload = { sub: userId, companyId, email, role }
 
     const token = await this.jwt.signAsync(payload, {
       secret: process.env.JWT_SECRET,
