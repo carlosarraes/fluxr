@@ -29,7 +29,9 @@ jobs:
           context: server
           push: true
           tags: gcr.io/refined-dogfish-353918/fluxr
-          build-args: DATABASE_URL=${{ secrets.DATABASE_URL }}
+          build-args: |
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v1
