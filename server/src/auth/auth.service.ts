@@ -1,11 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { LoginDto, UserDto } from './dto'
+import { JwtService } from '@nestjs/jwt'
 import * as argon from 'argon2'
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private jwt: JwtService) {}
 
   async signup(dto: UserDto) {
     const hash = await argon.hash(dto.password)
@@ -20,7 +21,7 @@ export class AuthService {
       throw new HttpException('Company not found', HttpStatus.NOT_FOUND)
     }
 
-    const user = await this.prisma.user.findFirst({
+    const user = await this.prisma.user.findUnique({
       where: {
         email: dto.email,
       },
@@ -50,7 +51,7 @@ export class AuthService {
   }
 
   async login(dto: LoginDto) {
-    const user = await this.prisma.user.findFirst({
+    const user = await this.prisma.user.findUnique({
       where: {
         email: dto.email,
       },
@@ -66,8 +67,19 @@ export class AuthService {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED)
     }
 
-    delete user.hash
+    const token = this.signToken(user.id, user.email, user.role)
 
-    return user
+    return token
+  }
+
+  async signToken(userId: number, email: string, role: string) {
+    const payload = { sub: userId, email, role }
+
+    const token = await this.jwt.signAsync(payload, {
+      secret: process.env.JWT_SECRET,
+      expiresIn: '1d',
+    })
+
+    return { token }
   }
 }
