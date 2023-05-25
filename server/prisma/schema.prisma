@@ -23,7 +23,7 @@ model Company {
   updatedAt      DateTime      @updatedAt
   users          User[]
   transactions   Transaction[]
-  Category       Category[]
+  category       Category[]
 }
 
 model User {
@@ -35,7 +35,7 @@ model User {
   hash      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  company   Company  @relation(fields: [companyId], references: [id])
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
 }
 
 model Category {
@@ -61,6 +61,6 @@ model Transaction {
   amount            Float
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  company           Company  @relation(fields: [companyId], references: [id])
+  company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
   category          Category @relation(fields: [categoryId], references: [id])
 }
