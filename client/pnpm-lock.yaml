@@ -10,6 +10,9 @@ dependencies:
   vue-router:
     specifier: '4'
     version: 4.2.1(vue@3.2.47)
+  vue-toastification:
+    specifier: 2.0.0-rc.5
+    version: 2.0.0-rc.5(vue@3.2.47)
 
 devDependencies:
   '@tailwindcss/forms':
@@ -1189,6 +1192,14 @@ packages:
       de-indent: 1.0.2
       he: 1.2.0
     dev: true
+
+  /vue-toastification@2.0.0-rc.5(vue@3.2.47):
+    resolution: {integrity: sha512-q73e5jy6gucEO/U+P48hqX+/qyXDozAGmaGgLFm5tXX4wJBcVsnGp4e/iJqlm9xzHETYOilUuwOUje2Qg1JdwA==}
+    peerDependencies:
+      vue: ^3.0.2
+    dependencies:
+      vue: 3.2.47
+    dev: false
 
   /vue-tsc@1.4.2(typescript@5.0.2):
     resolution: {integrity: sha512-8VFjVekJuFtFG+N4rEimoR0OvNubhoTIMl2dlvbpyAD40LVPR1PN2SUc2qZPnWGGRsXZAVmFgiBHX0RB20HGyA==}
