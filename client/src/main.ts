@@ -8,7 +8,7 @@ import Dashboard from './pages/Dashboard.vue'
 import 'vue-toastification/dist/index.css'
 
 const routes = [
-  { path: '/', component: Login },
+  { path: '/', component: Login, name: 'login' },
   { path: '/dashboard', component: Dashboard, name: 'dashboard' },
 ]
 
@@ -20,6 +20,7 @@ const router = createRouter({
 const app = createApp(App)
 
 const token = ref('')
+const url = 'http://localhost:8080'
 
 const options: PluginOptions = {
   position: POSITION.TOP_CENTER,
@@ -37,6 +38,7 @@ const options: PluginOptions = {
 }
 
 app.provide('token', token)
+app.provide('url', url)
 app.use(Toast, options)
 app.use(router)
 app.mount('#app')
