@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue'
+import { Ref, inject, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { useRouter } from 'vue-router'
-const url = 'http://localhost:8080'
 
 const email = ref('')
 const password = ref('')
-const token = inject('token')
+const token = inject('token') as Ref<string | null>
+const url = inject('url')
 const toast = useToast()
 const router = useRouter()
 let controller: AbortController
