@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, onMounted, ref, Ref } from 'vue'
+import { inject, onMounted, Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type { User } from '../types'
 import { ListPlus, ListMinus, Text, LogOut } from 'lucide-vue-next'
@@ -7,10 +7,7 @@ import { ListPlus, ListMinus, Text, LogOut } from 'lucide-vue-next'
 const router = useRouter()
 const token = inject('token') as Ref<string | null>
 const url = inject('url') as Ref<string>
-const user = ref<User>({
-  name: '',
-  email: '',
-})
+const user = inject('user') as Ref<User>
 
 const fetchUser = async () => {
   const response = await fetch(`${url}/user/me`, {
@@ -50,21 +47,24 @@ onMounted(() => {
       <LogOut :size="20" class="self-center" />
     </h2>
   </header>
-  <main class="flex flex-col items-center justify-start w-full gap-4">
+  <main class="flex flex-col items-center justify-start w-full gap-4 p-4">
     <button
-      class="flex justify-center items-center gap-4 bg-green-600 hover:bg-green-700 duration-200 text-white px-4 w-1/4 py-2 rounded-md"
+      class="w-full sm:w-1/2 md:w-1/3 flex justify-center items-center gap-4 bg-green-600 hover:bg-green-700 duration-200 text-white px-4 py-2 rounded-md"
+      @click="() => router.push({ name: 'receitas' })"
     >
       <ListPlus />
       Receitas
     </button>
     <button
-      class="flex justify-center items-center gap-4 bg-red-600 hover:bg-red-700 duration-200 text-white px-4 w-1/4 py-2 rounded-md"
+      class="w-full sm:w-1/2 md:w-1/3 flex justify-center items-center gap-4 bg-red-600 hover:bg-red-700 duration-200 text-white px-4 py-2 rounded-md"
+      @click="() => router.push({ name: 'despesas' })"
     >
       <ListMinus />
       Despesas
     </button>
     <button
-      class="flex justify-center items-center gap-4 bg-blue-600 hover:bg-blue-700 duration-200 text-white px-4 w-1/4 py-2 rounded-md"
+      class="w-full sm:w-1/2 md:w-1/3 flex justify-center items-center gap-4 bg-blue-600 hover:bg-blue-700 duration-200 text-white px-4 py-2 rounded-md"
+      @click="() => router.push({ name: 'relatorio' })"
     >
       <Text />
       Relatório
