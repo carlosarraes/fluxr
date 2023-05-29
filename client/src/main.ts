@@ -5,11 +5,18 @@ import './style.css'
 import App from './App.vue'
 import Login from './pages/Login.vue'
 import Dashboard from './pages/Dashboard.vue'
+import Receitas from './pages/Receitas.vue'
+import Despesas from './pages/Despesas.vue'
+import Relatorio from './pages/Relatorio.vue'
 import 'vue-toastification/dist/index.css'
+import type { User } from './types'
 
 const routes = [
   { path: '/', component: Login, name: 'login' },
   { path: '/dashboard', component: Dashboard, name: 'dashboard' },
+  { path: '/receitas', component: Receitas, name: 'receitas' },
+  { path: '/despesas', component: Despesas, name: 'despesas' },
+  { path: '/relatorio', component: Relatorio, name: 'relatorio' },
 ]
 
 const router = createRouter({
@@ -21,6 +28,11 @@ const app = createApp(App)
 
 const token = ref('')
 const url = 'http://localhost:8080'
+const user = ref({
+  name: '',
+  email: '',
+  companyId: 0,
+} as User)
 
 const options: PluginOptions = {
   position: POSITION.TOP_CENTER,
@@ -39,6 +51,7 @@ const options: PluginOptions = {
 
 app.provide('token', token)
 app.provide('url', url)
+app.provide('user', user)
 app.use(Toast, options)
 app.use(router)
 app.mount('#app')
