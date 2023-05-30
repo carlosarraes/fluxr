@@ -51,6 +51,7 @@ export class TransactionService {
         credit: dto.credit,
         debit: dto.debit,
         meal: dto.meal,
+        tip: dto.tip,
         total: dto.cash + dto.pix + dto.credit + dto.debit + dto.meal,
         company: {
           connect: {

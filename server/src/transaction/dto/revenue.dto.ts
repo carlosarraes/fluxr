@@ -30,4 +30,8 @@ export class RevenueDto {
   @IsNumber()
   @IsNotEmpty()
   meal: number
+
+  @IsNumber()
+  @IsNotEmpty()
+  tip: number
 }
