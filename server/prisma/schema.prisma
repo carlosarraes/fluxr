@@ -54,7 +54,6 @@ model Expense {
   companyId         Int
   categoryId        Int
   userId            Int
-  recordedDate      DateTime @default(now())
   transactionDate   DateTime
   recurring         Boolean
   recurringInterval String?
@@ -77,6 +76,7 @@ model Revenue {
   debit           Float
   pix             Float
   meal            Float
+  tip             Float
   total           Float
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
