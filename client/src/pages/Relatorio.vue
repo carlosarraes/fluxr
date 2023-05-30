@@ -5,16 +5,16 @@ import Nav from '../components/Nav.vue'
 <template>
   <Nav />
   <main>
-    <h1>Relatorio</h1>
+    <h1 class="text-xl text-blue-500 text-center">Relatórios</h1>
   </main>
 </template>
 
 <style scoped>
 nav {
-  height: 15vh;
+  height: 12vh;
 }
 
 main {
-  height: 85vh;
+  height: 88vh;
 }
 </style>
