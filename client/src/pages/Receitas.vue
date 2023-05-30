@@ -10,6 +10,7 @@ const pix = ref(0)
 const credit = ref(0)
 const debit = ref(0)
 const meal = ref(0)
+const tip = ref(0)
 const user = inject('user') as Ref<User>
 const toast = useToast()
 
@@ -31,6 +32,7 @@ const onSubmit = async () => {
         pix: pix.value,
         credit: credit.value,
         debit: debit.value,
+        tip: tip.value,
         meal: meal.value,
       }),
     })
@@ -49,6 +51,7 @@ const onSubmit = async () => {
     credit.value = 0
     debit.value = 0
     meal.value = 0
+    tip.value = 0
   }
 }
 </script>
@@ -56,10 +59,10 @@ const onSubmit = async () => {
 <template>
   <Nav />
   <section>
-    <h1>Receitas</h1>
+    <h1 class="text-xl text-center text-green-500">Receita</h1>
   </section>
   <main class="w-full">
-    <form class="w-full flex flex-col justify-center items-center p-4" @submit.prevent="onSubmit">
+    <form class="w-full flex flex-col justify-center items-center p-2" @submit.prevent="onSubmit">
       <label
         for="date"
         class="w-full sm:w-1/2 md:w-1/3 flex justify-start items-center text-gray-300 mb-2 ml-2"
@@ -148,6 +151,21 @@ const onSubmit = async () => {
         class="w-full sm:w-1/2 md:w-1/3 flex justify-center items-center gap-4 text-black duration-200 px-4 py-2 rounded-md"
         v-model.number="meal"
       />
+      <label
+        for="tip"
+        class="w-full sm:w-1/2 md:w-1/3 flex justify-start items-center text-gray-300 my-2 ml-2"
+      >
+        Gorjeta
+      </label>
+      <input
+        id="tip"
+        name="tip"
+        type="number"
+        step="0.01"
+        min="0"
+        class="w-full sm:w-1/2 md:w-1/3 flex justify-center items-center gap-4 text-black duration-200 px-4 py-2 rounded-md"
+        v-model.number="tip"
+      />
       <button
         type="submit"
         class="mt-12 w-full sm:w-1/2 md:w-1/3 flex justify-center items-center gap-4 text-white duration-200 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600"
@@ -160,10 +178,10 @@ const onSubmit = async () => {
 
 <style scoped>
 nav {
-  height: 15vh;
+  height: 12vh;
 }
 
 main {
-  height: 85vh;
+  height: 88vh;
 }
 </style>
