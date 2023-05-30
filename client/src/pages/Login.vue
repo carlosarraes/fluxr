@@ -9,7 +9,7 @@ const token = inject('token') as Ref<string | null>
 const url = inject('url')
 const toast = useToast()
 const router = useRouter()
-let controller: AbortController
+let controller: AbortController | null = null
 
 const onSubmit = async (e: Event) => {
   if (controller) controller.abort()
@@ -35,7 +35,7 @@ const onSubmit = async (e: Event) => {
     token.value = (await response.json()).token
     router.push({ name: 'dashboard' })
   } catch (error) {
-    toast.error(error.message)
+    if (error instanceof Error) toast.error(error.message)
   } finally {
     controller = null
   }
