@@ -8,8 +8,8 @@ import Dashboard from './pages/Dashboard.vue'
 import Receitas from './pages/Receitas.vue'
 import Despesas from './pages/Despesas.vue'
 import Relatorio from './pages/Relatorio.vue'
-import 'vue-toastification/dist/index.css'
 import type { User } from './types'
+import 'vue-toastification/dist/index.css'
 
 const routes = [
   { path: '/', component: Login, name: 'login' },
@@ -27,7 +27,8 @@ const router = createRouter({
 const app = createApp(App)
 
 const token = ref('')
-const url = 'http://localhost:8080'
+// const url = 'http://localhost:8080'
+const url = 'https://fluxr-4wgfen3n5q-rj.a.run.app'
 const user = ref({
   name: '',
   email: '',
